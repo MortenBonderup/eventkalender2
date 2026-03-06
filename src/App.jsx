@@ -2,6 +2,8 @@ import './App.css'
 import Eventlist from './components/Eventlist';
 import Header from './Header';
 import mitbillede from "./assets/calendar.png";
+import Searchfield from './components/Searchfield';
+import { useState } from 'react';
 
 const events = [
   {id: 1, title: "Møde", date: "2026-03-05", description: "Fællesmøde i kantinen"},
@@ -13,17 +15,30 @@ const events = [
 
 function App() {
 
+const [filter, setFilter] = useState(""); 
+
+function handleinput(event) { 
+  setFilter(event.target.value);
+}
+
 const sorteretliste = events.toSorted((a,b) =>
 a.date.localeCompare(b.date, "da", {sensitivity: "case"})
+);
+
+const filtreretliste=sorteretliste.filter(event=> 
+  event.title.toLowerCase().includes(filter.toLowerCase()) ||
+  event.description.toLowerCase().includes(filter.toLowerCase())
 );
 
   return (
     <section>
       <img src={mitbillede} alt="Dette er et billede af en kalender" width="150"/>
+      <Searchfield inputhandler={handleinput} filter={filter}/> 
       <Header/>
-      <Eventlist events={sorteretliste}/>
+      <Eventlist events={filtreretliste}/> 
     </section>
   )
 }
 
 export default App
+
