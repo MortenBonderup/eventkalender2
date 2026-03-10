@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Eventitem(props){
     
     const idag=new Date().toISOString().split("T")[0];
@@ -19,6 +21,11 @@ export default function Eventitem(props){
             <h3>{props.event.date === idag ? "I dag: ": props.event.date > idag ? "Kommende: " : "Historisk: "}{props.event.title}</h3>
             <p>{formatDate(props.event.date)}</p>
             <p>{props.event.description}</p>
+            <div className="event-actions">
+            <Link to={`/update/${props.event.id}`}>Update event</Link>
+            <button onClick={() => deleteHandler(props.event.id)}>Delete event</button>
+      </div>
+
         </div>
     )
     
