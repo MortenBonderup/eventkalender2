@@ -23,7 +23,7 @@ export default function Eventitem(props){
             <p>{props.event.description}</p>
             <div className="event-actions">
             <Link to={`/update/${props.event.id}`}>Update event</Link>
-            <button onClick={() => deleteHandler(props.event.id)}>Delete event</button>
+            <button onClick={() => props.deleteHandler(props.event.id)}>Delete event</button>
       </div>
 
         </div>

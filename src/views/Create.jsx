@@ -26,7 +26,7 @@ export default function Create() {
         e.preventDefault();
         const highestId=events.length > 0 ? Math.max(...events.map(event=>event.id)) : -1;
         const newEvent = {id: highestId+1, title: title, date: date, description: description};
-        setEvents([events, newEvent]);
+        setEvents([...events, newEvent]);
         navigate("/");
     }
 
